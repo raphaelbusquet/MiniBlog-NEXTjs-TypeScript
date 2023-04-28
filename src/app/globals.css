@@ -9,11 +9,6 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
-.container {
-    min-height: 60vh;
-    margin-bottom: 5em;
-}
-
 /* Change the placeholders fonts */
 input::placeholder,    
 textarea::placeholder {
@@ -32,7 +27,7 @@ a, nav button {
     background-color: transparent;
     border: none;
     color: #000;
-    transition: .4s;
+    transition: all .4s;
     font-size: 1em;
     cursor: pointer;
     font-family: "Montserrat", sans-serif;
@@ -113,6 +108,11 @@ input, textarea {
 /* All buttons with disable property  */
 button[disabled] {
     background-color: #aaa;
+}
+
+.container {
+    min-height: 60vh;
+    margin-bottom: 5em;
 }
 
 .container .error {

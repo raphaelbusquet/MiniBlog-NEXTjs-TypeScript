@@ -1,17 +1,10 @@
 "use client"
-import "./globals.css"
-
-import Link from "next/link"
-
-// Components
-import Navbar from "./components/Navbar"
 
 export default function Home() {
 
   return (
-    <div className="container">
-      <Navbar />
-      <div>Content</div>
-    </div>
+   <div className="flex justify-center items-center">
+      <h1 className="mt-5 text-3xl bolder">Home</h1>
+   </div>
   )
 }

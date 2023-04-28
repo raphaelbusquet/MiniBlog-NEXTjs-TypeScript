@@ -1,12 +1,12 @@
 import { initializeApp } from 'firebase/app'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAEfDripy9D95gh3KjhMPGPQaJg5JEN_3U",
-    authDomain: "sometests-d2c53.firebaseapp.com",
-    projectId: "sometests-d2c53",
-    storageBucket: "sometests-d2c53.appspot.com",
-    messagingSenderId: "757907945613",
-    appId: "1:757907945613:web:2995c11aa2d6d8faf70ac4"
+    apiKey: "AIzaSyAciNf0hQ2DxNiucsNKhaw593a1OIZ43rY",
+    authDomain: "miniblognext13.firebaseapp.com",
+    projectId: "miniblognext13",
+    storageBucket: "miniblognext13.appspot.com",
+    messagingSenderId: "87706865913",
+    appId: "1:87706865913:web:744e82a68d186b5d151228"
 } 
 
 const app = initializeApp(firebaseConfig)

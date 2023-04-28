@@ -1,3 +1,8 @@
+import "./globals.css"
+
+// Components
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 export const metadata = {
   title: 'FireBase App',
@@ -11,7 +16,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="App">
+          <Navbar />
+            <div className="container">
+              {children}
+            </div>
+          <Footer />
+        </div>
+      </body>
       
     </html>
   )

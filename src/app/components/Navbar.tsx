@@ -14,23 +14,23 @@ const Navbar = () => {
             Mini<span>Blog</span>
         </Link>
         <ul className={styles.links_list}>
-            <li className={pathname == "/" ? styles.active : ""}>
-                <Link href={"/"}>
+            <li>
+                <Link href={"/"} className={pathname == "/" ? styles.active : ""}>
                     Home
                 </Link>
             </li>
-            <li className={pathname == "/login" ? styles.active : ""}>
-                <Link href={"/login"}>
+            <li>
+                <Link href={"/login"} className={pathname == "/login" ? styles.active : ""}>
                     Login
                 </Link>
             </li>
-            <li  className={pathname == "/register" ? styles.active : ""}>
-                <Link href={"/register"}>
+            <li>
+                <Link href={"/register"}  className={pathname == "/register" ? styles.active : ""}>
                     Cadastrar
                 </Link>
             </li>
-            <li className={pathname == "/about" ? styles.active : ""}>
-                <Link href={"/about"}>
+            <li>
+                <Link href={"/about"} className={pathname == "/about" ? styles.active : ""}>
                     Sobre
                 </Link>
             </li>
