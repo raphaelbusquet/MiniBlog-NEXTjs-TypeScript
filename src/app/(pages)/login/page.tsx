@@ -1,15 +1,27 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import signIn from "@/app/firebase/auth/signinundefined"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 const Login = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const router = useRouter()
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
+
+    const { result, error } = await signIn(email, password)
+
+    if (error) {
+      return console.log(error)
+    }
+
+    // Else sucessful
+    console.log(result)
+    return router.push('/')
   }
 
   return (
@@ -40,7 +52,7 @@ const Login = () => {
           />
         </label>
         <div className="w-full flex justify-center items-center">
-          <button className="btn">Entrar</button>
+          <button type="submit" className="btn">Entrar</button>
         </div>
         {/* {!loading && <button className="btn">Entrar</button>}
         {loading && <button className="btn" disabled>Aguarde...</button>}

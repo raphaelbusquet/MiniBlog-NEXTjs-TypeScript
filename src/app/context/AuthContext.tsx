@@ -1,53 +1,47 @@
-import { useContext, createContext, ReactNode, useState } from "react"; 
+import { useState, useEffect, useContext, createContext, FC } from 'react';
+import { onAuthStateChanged, getAuth } from 'firebase/auth';
+import firebase_app from '../firebase/config';
 
-
-type authContextType = {
-    user: boolean;
-    login: () => void;
-    logout: () => void;
-};
-
-const authContextDefaultValues: authContextType = {
-    user: null,
-    login: () => {},
-    logout: () => {},
-};
-
-const AuthContext = createContext<authContextType>(authContextDefaultValues);
-
-export function useAuth() {
-    return useContext(AuthContext);
+interface User {
+  user: string;
+  password: string;
+  prevState: null | undefined | boolean
 }
 
-type Props = {
-    children: ReactNode;
-};
-
-export function AuthProvider({ children }: Props) {
-    const [user, setUser] = useState<boolean>(null);
-
-    const login = () => {
-        setUser(true);
-    };
-
-    const logout = () => {
-        setUser(false);
-    };
-
-    const value = {
-        user,
-        login,
-        logout,
-    };
-
-    return (
-        <>
-            <AuthContext.Provider value={value}>
-                {children}
-            </AuthContext.Provider>
-        </>
-    );
+interface AuthContextProps {
+  user: User | null;
 }
 
+export const AuthContext = createContext<AuthContextProps>({ user: null });
 
+export const useAuthContext = () => useContext(AuthContext);
 
+interface AuthContextProviderProps {
+  children: JSX.Element
+}
+
+export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(getAuth(firebase_app), user => {
+      if (user) {
+        setUser({
+          user: user.email as string,
+          password: '',
+          prevState: null
+        });
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user }}>{loading ? <div>Loading...</div> : children}
+    </AuthContext.Provider>
+  );
+};

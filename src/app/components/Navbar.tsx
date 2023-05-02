@@ -2,11 +2,40 @@
 import styles from "./Navbar.module.css"
 
 import Link from "next/link"
+import { useState } from "react"
 import { usePathname } from "next/navigation"
+import { useAuthContext } from "../context/AuthContext"
+import { getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile,
+    signOut } from "firebase/auth"
+
 
 const Navbar = () => {
 
     const pathname = usePathname()
+
+    const { user } = useAuthContext()
+
+    // Clean up (deal with memory leak)
+    const [cancelled, setCancelled] = useState(false)
+
+    const auth = getAuth()
+
+    function checkIfIsCancelled() {
+        if (cancelled) {
+            return;
+        }
+    }
+
+
+    const logout = () => {
+
+        checkIfIsCancelled()
+
+        signOut(auth)
+    }
 
   return (
     <nav className={styles.navbar}>
@@ -34,6 +63,11 @@ const Navbar = () => {
                     Sobre
                 </Link>
             </li>
+            {user && (
+                <li>
+                    <button onClick={logout}>Sair</button>
+                </li>
+            )}
         </ul>
     </nav>
   )

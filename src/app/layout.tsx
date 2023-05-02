@@ -1,8 +1,11 @@
+'use client'
 import "./globals.css"
 
 // Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
+import { AuthContextProvider } from "./context/AuthContext";
 
 export const metadata = {
   title: 'FireBase App',
@@ -17,15 +20,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="App">
-          <Navbar />
-            <div className="container">
-              {children}
-            </div>
-          <Footer />
-        </div>
+        <AuthContextProvider> 
+          <div className="App">
+            <Navbar />
+              <div className="container">
+                {children}
+              </div>
+            <Footer />
+          </div>
+        </AuthContextProvider>
       </body>
-      
     </html>
   )
 }
